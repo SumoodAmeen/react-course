@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Assignemnts</title>
+</head>
+
+<body>
+    <div class="container">
+    </div>
+
+    <script src="https://unpkg.com/supersimpledev/react.js"></script>
+    <script src="https://unpkg.com/supersimpledev/react-dom.js"></script>
+    <script src="https://unpkg.com/supersimpledev/babel.js"></script>
+    <script src="https://unpkg.com/supersimpledev/dayjs.js"></script>
+
+
+    <script type="text/babel">
+
+        const button = <button>Click</button>;
+        const paragraph = <p>My name is ameen</p>
+        const div = (
+            <div>
+                <p>Cotton socks</p>
+                <p>Price: $10</p>
+                <button>Buy now</button>
+            </div>
+        );
+
+        const add = <p>total is {10+2*8}</p>;
+        const shipping = 5;
+        const product = 15;
+        const total = (
+            <div>
+                <p>shipping = {shipping}</p>
+                <p>product = {product}</p>
+                <p>total = {shipping+product}</p>
+                <button>Place order</button>
+            </div>
+        );
+        const day = dayjs().format('MMMM D');
+        const today = <p>Today is {day}</p>;
+        const now = dayjs().format('HH:mm:ss');
+        const time = <p>Current time is {now}</p>;
+
+        const container = document.querySelector('.container');
+        ReactDOM.createRoot(container).render(time);
+
+
+        
+
+    </script>
+</body>
+
+</html>
