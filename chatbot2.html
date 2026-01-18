@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>chatbot</title>
+</head>
+
+<body>
+    <div class="container">
+    </div>
+
+    <script src="https://unpkg.com/supersimpledev/react.js"></script>
+    <script src="https://unpkg.com/supersimpledev/react-dom.js"></script>
+    <script src="https://unpkg.com/supersimpledev/babel.js"></script>
+    <script src="https://unpkg.com/supersimpledev/dayjs.js"></script>
+
+
+    <script type="text/babel">
+        // More structured code of chatbot.html and added array and objects also we are going to use that in our App component
+
+       function ChatInput() {
+            return(
+                <>
+                    <input placeholder='send a message to ChatBot' size='30'></input>
+                    <button>Send</button>
+                </>
+            );
+       };
+
+       function ChatMessage({message, sender}) {
+
+            return(
+                <div>
+                    {sender === 'robot' && <img src="robot.png" width="50" />}
+                    {message}
+                    {sender === 'user' && <img src="user.png" width="50" />}
+                </div>
+            )
+       }
+
+        function App() {
+            const chatMessages = [
+                {message: "hello chatbot", sender: "user"},
+                {message: "Hello! How can I help you?", sender: "robot"},
+                {message: "Can you get me todays data?", sender: "user"},
+                {message: "December 29th", sender: "robot"}
+
+            ];
+
+            const chatMessageComp = chatMessages.map((chatMessage) => {
+                return (
+                <ChatMessage message = {chatMessage.message} sender={chatMessage.sender} />
+            );
+        });
+
+            return(
+                <>
+                    <ChatInput />
+                    {chatMessageComp}
+                    
+                </>
+            );
+        }
+
+        const container = document.querySelector('.container');
+        ReactDOM.createRoot(container).render(<App /> /*app*/);
+
+
+        
+
+    </script>
+</body>
+
+</html>
