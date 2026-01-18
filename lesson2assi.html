@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>chatbot</title>
+</head>
+
+<body>
+    <div class="container">
+    </div>
+
+    <script src="https://unpkg.com/supersimpledev/react.js"></script>
+    <script src="https://unpkg.com/supersimpledev/react-dom.js"></script>
+    <script src="https://unpkg.com/supersimpledev/babel.js"></script>
+    <script src="https://unpkg.com/supersimpledev/dayjs.js"></script>
+
+
+    <script type="text/babel">
+        function App() {
+            return(
+                <>
+                    <LoginForm />
+                    <Products name="tennis ball" price="$5" dprice="$1" />
+                    <Products name="cotton socks" price="$10" />
+                    <Products name="t shirt" price="$15" />
+                </>
+            );
+        }
+
+        function LoginForm() {
+            return(
+                <>
+                    <div>
+                        <input placeholder="Email"/>
+                    </div>
+                    
+                    <div>
+                        <input placeholder="Password"/>
+                    </div>
+                    <button>login</button>
+                    <button>signup</button>
+                </>
+            )
+        }
+
+        function Products({name, price, dprice}) {
+            return(
+                <>
+                    <p>{name}</p>
+                    
+                    {dprice ? <><p><del>price:{price}</del></p> <p>Discount Price:{dprice}</p></>: <p>price:{price}</p>}
+                    <button>Add to cart</button>
+                </>
+            );
+        }
+
+        const container = document.querySelector('.container');
+        ReactDOM.createRoot(container).render(<App />);
+        
+
+    </script>
+</body>
+
+</html>

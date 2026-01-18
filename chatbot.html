@@ -26,15 +26,64 @@
             );
        };
 
-       const app = (
+       function ChatMessage(/*props*/{message, sender} /*another simpler way to write props*/) {
+            // const message = props.message;
+            // const sender = props.sender;
+            //const {message, sender} = props; // a shortcut for the above two lines
+
+            /*if(sender === 'robot') {
+                return(
+                    <div>
+                        <img src="robot.png" width="50" />
+                        {message}
+                    </div>
+                )
+            }*/ //In this method we are using if statement outside JSX check below it is how we use it inside JSX
+
+            return(
+                <div>
+                    {sender === 'robot' && <img src="robot.png" width="50" />}
+                    {message}
+                    {sender === 'user' && <img src="user.png" width="50" />}
+                </div>
+            )
+       }
+
+       {/*const app = (
             <>
                 <ChatInput />
+                <ChatMessage message="hi chatbot" sender="user" />
+                <ChatMessage message="Hello! How can I help you?" sender="robot" /> created our own attributes called message and sender
+                <ChatMessage message="Can you get me todays data?" sender="user" />
+                <ChatMessage message="Today is December 28" sender="robot" />
+
                 
             </>
-        );
+        ); */} //Instead of using JS we can use component to create app, which is the best practice
+
+        function App() {
+            const chatMessages = [  //this is an array. Array is a list of values we use [] to create array
+                {  //{} this represents an object. Object is a collection of key value pairs, objects group related values together
+                    message: "hello chatbot", sender: "user"},
+                {message: "Hello! How can I help you?", sender: "robot"},
+                {message: "Can you get me todays data?", sender: "user"},
+                {message: "December 29th", sender: "robot"}
+
+            ];
+
+            return(
+                <>
+                    <ChatInput />
+                    <ChatMessage message="hello chatbot" sender="user" />
+                    <ChatMessage message="Hello! How can I help you?" sender="robot" />
+                    <ChatMessage message="Can you get me todays data?" sender="user" />
+                    <ChatMessage message="December 29th" sender="robot" />
+                </>
+            );
+        }
 
         const container = document.querySelector('.container');
-        ReactDOM.createRoot(container).render(app);
+        ReactDOM.createRoot(container).render(<App /> /*app*/);
 
 
         
