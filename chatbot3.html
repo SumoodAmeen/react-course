@@ -2,7 +2,7 @@
 <html>
 
 <head>
-    <title>chatbot</title>
+    <title>chatbot 3</title>
 </head>
 
 <body>
@@ -38,30 +38,31 @@
             )
         }
 
-        function App() {
+        function ChatMessages() {
             const chatMessages = [
-                { message: "hello chatbot", sender: "user", id: "id1" },
-                { message: "Hello! How can I help you?", sender: "robot", id: "id2" },
-                { message: "Can you get me todays data?", sender: "user", id: "id3" },
-                { message: "January 22nd", sender: "robot", id: "id4" }
+                { message: 'hello chatbot', sender: 'user', id: 'id1' },
+                { message: 'Hello! How can I help you?', sender: 'robot', id: 'id2' },
+                { message: 'Can you get me todays data?', sender: 'user', id: 'id3' },
+                { message: 'January 22nd', sender: 'robot', id: 'id4' }
+            ]
+            return (
+                <>
+                    {chatMessages.map((chatMessage) => {
+                        return (
+                            <ChatMessage message={chatMessage.message} sender={chatMessage.sender} key={chatMessage.id}
+                            />
+                        )
+                    })}
+                </>
 
-            ];
+            )
+        }
 
-            {/* const chatMessageComp = chatMessages.map((chatMessage) => {
-                return (
-                <ChatMessage message = {chatMessage.message} sender={chatMessage.sender} />
-            );
-        });*/} // we used this map inside the return so we dont need to use this in a variable like this
-
+        function App() {
             return (
                 <>
                     <ChatInput />
-                    {/*{chatMessageComp}*/}
-                    {chatMessages.map((chatMessage) => {
-                        return (
-                            <ChatMessage message={chatMessage.message} sender={chatMessage.sender} key={chatMessage.id} />
-                        )
-                    })}
+                    <ChatMessages />
 
                 </>
             );
