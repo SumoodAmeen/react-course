@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>ChatBot</title>
+</head>
+
+<body>
+    <div class="container">
+    </div>
+
+    <script src="https://unpkg.com/supersimpledev/react.js"></script>
+    <script src="https://unpkg.com/supersimpledev/react-dom.js"></script>
+    <script src="https://unpkg.com/supersimpledev/babel.js"></script>
+    <script src="https://unpkg.com/supersimpledev/dayjs.js"></script>
+
+
+    <script type="text/babel">
+        // More structured code of chatbot.html and added array and objects also we are going to use that in our App component
+
+        function ChatInput({ chatMessages, setChatMessages }) {
+            const [inputText, setInputText] = React.useState('');
+        function saveInputText(event) {
+            setInputText(event.target.value);
+        }
+
+        function sendMessage() {
+            setChatMessages([
+                ...chatMessages,
+                { message: inputText, sender: 'user', id: crypto.randomUUID() }
+            ]);
+            setInputText(''); // clear input field after sending message
+        }
+            return (
+                <>
+                    <input 
+                    placeholder='send a message to ChatBot'
+                    size='30'
+                    onChange={saveInputText}
+                    value={inputText}
+                    ></input>
+                    <button onClick={sendMessage}>Send</button>
+                </>
+            );
+        };
+
+        function ChatMessage({ message, sender }) {
+
+            return (
+                <div>
+                    {sender === 'robot' && <img src="robot.png" width="50" />}
+                    {message}
+                    {sender === 'user' && <img src="user.png" width="50" />}
+                </div>
+            )
+        }
+
+        function ChatMessages({chatMessages, setChatMessages}) {
+            
+
+            //const chatMessages = array[0];      // current state value, means the current value of chatMessages
+            //const setChatMessages = array[1];  // function to update the state
+            //const [chatMesaages, setChatMessages] = array;  // this is called array destructuring, this line replaces the above two lines
+
+            function sendMessage() {
+                setChatMessages([
+                    ...chatMessages,   // spread operator, ... means make a copy of all existing items from chatMessages array
+                    { message: 'test', sender: 'user', id: crypto.randomUUID() }
+                ]);
+
+            }
+            console.log(chatMessages);
+            return (
+                <>
+                    <button onClick={sendMessage}>message</button>
+                    {chatMessages.map((chatMessage) => {
+                        return (
+                            <ChatMessage message={chatMessage.message} sender={chatMessage.sender} key={chatMessage.id}
+                            />
+                        )
+                    })}
+                </>
+
+            )
+        }
+
+        function App() {
+            const [chatMessages, setChatMessages] = React.useState([  // const [chatMessages, setChatMessages] this is even shorter way to destructure array, than below methods.
+                { message: 'hello chatbot', sender: 'user', id: 'id1' },
+                { message: 'Hello! How can I help you?', sender: 'robot', id: 'id2' },
+                { message: 'Can you get me todays data?', sender: 'user', id: 'id3' },
+                { message: 'January 22nd', sender: 'robot', id: 'id4' }
+            ]);
+            return (
+                <>
+                    <ChatInput chatMessages={chatMessages} setChatMessages={setChatMessages}/>
+                    <ChatMessages chatMessages={chatMessages} setChatMessages={setChatMessages}/>
+
+                </>
+            );
+        }
+
+        const container = document.querySelector('.container');
+        ReactDOM.createRoot(container).render(<App /> /*app*/);
+
+
+
+
+    </script>
+</body>
+
+</html>
