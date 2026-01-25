@@ -46,8 +46,9 @@
                 { message: 'January 22nd', sender: 'robot', id: 'id4' }
             ]);
 
-            const chatMessages = array[0];      // current state value, means the current value of chatMessages
-            const setChatMessages = array[1];  // function to update the state
+            //const chatMessages = array[0];      // current state value, means the current value of chatMessages
+            //const setChatMessages = array[1];  // function to update the state
+            const [chatMesaages, setChatMessages] = array;  // this is called array destructuring, this line replaces the above two lines
 
             function sendMessage() {
                 setChatMessages([
