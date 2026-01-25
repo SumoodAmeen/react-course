@@ -39,7 +39,7 @@
         }
 
         function ChatMessages() {
-            const array = React.useState([
+            const [chatMessages, setChatMessages] = React.useState([  // const [chatMessages, setChatMessages] this is even shorter way to destructure array, than below methods.
                 { message: 'hello chatbot', sender: 'user', id: 'id1' },
                 { message: 'Hello! How can I help you?', sender: 'robot', id: 'id2' },
                 { message: 'Can you get me todays data?', sender: 'user', id: 'id3' },
@@ -48,7 +48,7 @@
 
             //const chatMessages = array[0];      // current state value, means the current value of chatMessages
             //const setChatMessages = array[1];  // function to update the state
-            const [chatMesaages, setChatMessages] = array;  // this is called array destructuring, this line replaces the above two lines
+            //const [chatMesaages, setChatMessages] = array;  // this is called array destructuring, this line replaces the above two lines
 
             function sendMessage() {
                 setChatMessages([
