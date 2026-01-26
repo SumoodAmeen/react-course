@@ -13,6 +13,7 @@
     <script src="https://unpkg.com/supersimpledev/react-dom.js"></script>
     <script src="https://unpkg.com/supersimpledev/babel.js"></script>
     <script src="https://unpkg.com/supersimpledev/dayjs.js"></script>
+    <script src="https://unpkg.com/supersimpledev/chatbot.js"></script>
 
 
     <script type="text/babel">
@@ -20,24 +21,33 @@
 
         function ChatInput({ chatMessages, setChatMessages }) {
             const [inputText, setInputText] = React.useState('');
-        function saveInputText(event) {
-            setInputText(event.target.value);
-        }
 
-        function sendMessage() {
-            setChatMessages([
-                ...chatMessages,
-                { message: inputText, sender: 'user', id: crypto.randomUUID() }
-            ]);
-            setInputText(''); // clear input field after sending message
-        }
+            function saveInputText(event) {
+                setInputText(event.target.value);
+            }
+
+            function sendMessage() {
+                const newChatMessages = [
+                    ...chatMessages,
+                    { message: inputText, sender: 'user', id: crypto.randomUUID() }
+                ]
+                setChatMessages(newChatMessages); // we saved the user message in chatMessages state that is saved to newChatMessages variable
+
+                const response = Chatbot.getResponse(inputText);  // get response from chatbot.js externale library
+                setChatMessages([  // this alone gives response, but it removed our hello response
+                    ...newChatMessages,  //...chatMessages, here instead of making a copy of chatMessages state we are making a copy of newChatMessages which already has user message
+                    { message: response, sender: 'robot', id: crypto.randomUUID() }
+                ]);
+
+                setInputText(''); // clear input field after sending message
+            }
             return (
                 <>
-                    <input 
-                    placeholder='send a message to ChatBot'
-                    size='30'
-                    onChange={saveInputText}
-                    value={inputText}
+                    <input
+                        placeholder='send a message to ChatBot'
+                        size='30'
+                        onChange={saveInputText}
+                        value={inputText}
                     ></input>
                     <button onClick={sendMessage}>Send</button>
                 </>
@@ -55,8 +65,8 @@
             )
         }
 
-        function ChatMessages({chatMessages, setChatMessages}) {
-            
+        function ChatMessages({ chatMessages, setChatMessages }) {
+
 
             //const chatMessages = array[0];      // current state value, means the current value of chatMessages
             //const setChatMessages = array[1];  // function to update the state
@@ -93,8 +103,8 @@
             ]);
             return (
                 <>
-                    <ChatInput chatMessages={chatMessages} setChatMessages={setChatMessages}/>
-                    <ChatMessages chatMessages={chatMessages} setChatMessages={setChatMessages}/>
+                    <ChatInput chatMessages={chatMessages} setChatMessages={setChatMessages} />
+                    <ChatMessages chatMessages={chatMessages} setChatMessages={setChatMessages} />
 
                 </>
             );
